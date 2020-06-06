@@ -122,12 +122,13 @@ gcm os | l == 0    = (V.empty, V.empty)
 -- | Fill in missing values of an indexed vector.
 --
 -- @
---  smooth [-2, 2] [0, 4] = [0, 1, 2, 3, 4]
+--  smooth [-2, 2, 4] [0, 4, 10] = [0, 1, 2, 3, 4, 7, 10]
 -- @
 --
 -- Assume that index vector is ordered.
 smooth :: (Vector v Double, Vector v Int) => v Int -> v Double -> v Double
--- TODO: Check that lengths are equal?
+-- TODO: Do not assume order of index vector.
+-- TODO: Check that lengths are equal.
 smooth xs ys | l == 0    = V.empty
              | l == 1    = V.take 1 ys
              | otherwise = V.create

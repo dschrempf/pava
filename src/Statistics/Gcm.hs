@@ -26,6 +26,8 @@ module Statistics.Gcm
 
 -- TODO: LCM.
 
+-- TODO: Check benchmarks and tests.
+
 import qualified Data.Vector.Generic as V
 import qualified Data.Vector.Generic.Mutable as M
 import Data.Vector.Generic (Vector)

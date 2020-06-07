@@ -42,3 +42,17 @@ test-suite pava-test
     , pava
     , vector
   default-language: Haskell2010
+
+benchmark pava-bench
+  type: exitcode-stdio-1.0
+  main-is: Bench.hs
+  hs-source-dirs:
+      bench
+  ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , criterion
+    , mwc-random
+    , pava
+    , vector
+  default-language: Haskell2010

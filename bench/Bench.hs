@@ -24,18 +24,24 @@ import System.Random.MWC.Distributions
 
 import Statistics.Gcm
 
-genData :: Int -> GenIO -> IO (Vector Double)
-genData n g = V.fromList <$> replicateM n (exponential 1.0 g)
+genPredictors :: Int -> Vector Int
+genPredictors n = V.iterateN n succ 0
+
+genResponses :: Int -> GenIO -> IO (Vector Double)
+genResponses n g = V.fromList <$> replicateM n (exponential 1.0 g)
 
 main :: IO ()
 main = do
   g <- create
-  d1e3 <- genData 1000 g
-  d1e5 <- genData 10000 g
-  d1e7 <- genData 1000000 g
+  let p1e3 = genPredictors 1000
+      p1e4 = genPredictors 10000
+      p1e5 = genPredictors 100000
+  d1e3 <- genResponses 1000 g
+  d1e4 <- genResponses 10000 g
+  d1e5 <- genResponses 100000 g
   defaultMain
     [ bgroup "Greatest convex minorant"
-      [ bench "Vector of length 1e3" $ nf gcm d1e3
-      , bench "Vector of length 1e5" $ nf gcm d1e5
-      , bench "Vector of length 1e7" $ nf gcm d1e7 ]
+      [ bench "Vector of length 1e3" $ nf (gcm p1e3) d1e3
+      , bench "Vector of length 1e4" $ nf (gcm p1e4) d1e4
+      , bench "Vector of length 1e5" $ nf (gcm p1e5) d1e5 ]
     ]

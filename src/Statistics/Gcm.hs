@@ -13,15 +13,7 @@ Portability :  portable
 
 Creation date: Sat Jun  6 16:36:32 2020.
 
-Possible sources:
-
-- A [good introduction to PAVA](https://repository.tudelft.nl/islandora/object/uuid:5a111157-1a92-4176-9c8e-0b848feb7c30?collection=education).
-
-- [Isotone regression in R](https://cran.r-project.org/web/packages/isotone/index.html).
-
-- [Computation of greatest convex minorants in R](http://search.r-project.org/library/fdrtool/html/gcmlcm.html).
-
-- [Wikipedia article on isotonic regression](https://en.wikipedia.org/wiki/Isotonic_regression).
+For general help, please refer to the README distributed with the library.
 
 -}
 
@@ -30,6 +22,8 @@ module Statistics.Gcm
     gcm
   , smooth
   ) where
+
+-- TODO: LCM.
 
 -- TODO: Write down assumptions of functions.
 

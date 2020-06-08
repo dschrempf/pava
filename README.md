@@ -1,5 +1,11 @@
 # Pool adjacent violators algorithm
 
+The pool adjacent violators algorithm (PAVA) is an iterative algorithm for
+solving monotonic regression problems. In particular, (antitonic) regression is
+the computation of a non-decreasing (non-increasing) sequence of values such
+that a given problem is optimized. PAVA can also be used to compute the greatest
+convex minorant and the least concave majorant of a given set of observables.
+
 Possible sources:
 
 - A [good introduction to PAVA](https://repository.tudelft.nl/islandora/object/uuid:5a111157-1a92-4176-9c8e-0b848feb7c30?collection=education).

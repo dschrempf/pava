@@ -1,0 +1,53 @@
+name:                pava
+version:             0.1.0.0
+github:              "dschrempf/pava"
+license:             GPL-3.0-or-later
+author:              "Dominik Schrempf"
+maintainer:          "dominik.schrempf@gmail.com"
+copyright:           "Dominik Schrempf (2020)"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+synopsis:            Greatest convex majorants and least concave minorants using the pool adjacent violators aglorithm
+category:            Math, Statistics
+description:         Please see the README on GitHub at <https://github.com/dschrempf/pava#readme>
+
+library:
+  source-dirs: src
+  dependencies:
+    - base >= 4.7 && < 5
+    - vector
+
+tests:
+  pava-test:
+    main:        Spec.hs
+    source-dirs: test
+    ghc-options:
+      - -Wall
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - base >=4.7 && <5
+      - hspec
+      - hspec-discover
+      - pava
+      - vector
+
+benchmarks:
+  pava-bench:
+    main:        Bench.hs
+    source-dirs: bench
+    ghc-options:
+      - -Wall
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - base >=4.7 && <5
+      - criterion
+      - mwc-random
+      - pava
+      - vector

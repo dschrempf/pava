@@ -10,7 +10,7 @@ extra-source-files:
 - README.md
 - ChangeLog.md
 
-synopsis:            Greatest convex majorants and least concave minorants using the pool adjacent violators aglorithm
+synopsis:            Greatest convex majorants and least concave minorants
 category:            Math, Statistics
 description:         Please see the README on GitHub at <https://github.com/dschrempf/pava#readme>
 

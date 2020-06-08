@@ -27,8 +27,6 @@ may be in future releases.
 
 Run times with random exponential vectors of different length:
 
-    stack bench 2>&1
-
     pava> benchmarks
     Running 1 benchmarks...
     Benchmark pava-bench: RUNNING...
@@ -54,5 +52,3 @@ Run times with random exponential vectors of different length:
     variance introduced by outliers: 13% (moderately inflated)
     
     Benchmark pava-bench: FINISH
-
-Test.

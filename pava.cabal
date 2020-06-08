@@ -1,4 +1,4 @@
-cabal-version: 3.0
+cabal-version: 2.2
 
 -- This file has been generated from package.yaml by hpack version 0.34.2.
 --
@@ -30,7 +30,6 @@ library
       Statistics.Gcm
       Statistics.Lcm
       Statistics.Pava.Common
-  other-modules:
       Paths_pava
   autogen-modules:
       Paths_pava

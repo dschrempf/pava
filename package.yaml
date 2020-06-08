@@ -5,8 +5,6 @@ license:             GPL-3.0-or-later
 author:              "Dominik Schrempf"
 maintainer:          "dominik.schrempf@gmail.com"
 copyright:           "Dominik Schrempf (2020)"
-verbatim:
-  cabal-version: 3.0
 
 extra-source-files:
 - README.md
@@ -21,7 +19,7 @@ library:
   dependencies:
     - base >= 4.7 && < 5
     - vector
-  generated-other-modules: Paths_pava
+  generated-exposed-modules: Paths_pava
 
 tests:
   pava-test:

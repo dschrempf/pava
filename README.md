@@ -18,3 +18,7 @@ Reading list:
 - [Isotone regression in R](https://cran.r-project.org/web/packages/isotone/index.html).
 - [Computation of greatest convex minorants in R](http://search.r-project.org/library/fdrtool/html/gcmlcm.html).
 - [Wikipedia article on isotonic regression](https://en.wikipedia.org/wiki/Isotonic_regression).
+
+## Run times
+Run times with random exponential vectors of different length:
+

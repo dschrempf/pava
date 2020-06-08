@@ -6,7 +6,7 @@ cabal-version: 2.2
 
 name:           pava
 version:        0.1.0.0
-synopsis:       Greatest convex majorants and least concave minorants using the pool adjacent violators aglorithm
+synopsis:       Greatest convex majorants and least concave minorants
 description:    Please see the README on GitHub at <https://github.com/dschrempf/pava#readme>
 category:       Math, Statistics
 homepage:       https://github.com/dschrempf/pava#readme

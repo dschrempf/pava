@@ -1,6 +1,8 @@
 
 # Pool adjacent violators algorithm
 
+<p align="center"><img src="https://travis-ci.org/dschrempf/pava.svg?branch=master" /></p>
+
 Compute **greatest convex majorants** and **least concave minorants** using the pool
 adjacent violators algorithm.
 
@@ -25,7 +27,7 @@ may be in future releases.
 
 ## Run times
 
-Run times with random exponential vectors of different length:
+Run times with random exponential vectors of different lengths:
 
     stack bench 2>&1
 
@@ -54,3 +56,4 @@ Run times with random exponential vectors of different length:
     variance introduced by outliers: 13% (moderately inflated)
     
     Benchmark pava-bench: FINISH
+

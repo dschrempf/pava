@@ -17,7 +17,10 @@ extra-source-files:  README.md
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Statistics.Gcm
+  exposed-modules:
+      Statistics.Gcm
+    , Statistics.Lcm
+    , Statistics.Pava.Common
   build-depends:
        base >= 4.7 && < 5
      , vector
@@ -32,6 +35,8 @@ test-suite pava-test
   main-is: Spec.hs
   other-modules:
       Statistics.GcmSpec
+      Statistics.LcmSpec
+      Statistics.Pava.CommonSpec
   hs-source-dirs:
       test
   ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N

@@ -1,6 +1,6 @@
 {- |
-   Module      :  Statistics.GcmSpec
-   Description :  Unit tests for Statistics.Gcm
+   Module      :  Statistics.LcmSpec
+   Description :  Unit tests for Statistics.Lcm
    Copyright   :  (c) Dominik Schrempf, 2020
    License     :  GPL-3.0-or-later
 
@@ -12,15 +12,17 @@ Creation date: Fri Jun  5 17:01:22 2020.
 
 -}
 
-module Statistics.GcmSpec
+module Statistics.LcmSpec
   ( spec
   ) where
+
+import           Prelude hiding (lcm)
 
 import           Test.Hspec
 import qualified Data.Vector.Unboxed as V
 import           Data.Vector.Unboxed (Vector)
 
-import           Statistics.Gcm
+import           Statistics.Lcm
 
 ps :: Vector Int
 ps = V.fromList [0..9]
@@ -29,13 +31,13 @@ rs :: Vector Double
 rs = V.fromList [19, 16, 17, 12, 19, 6, 13, 1, 4, 0]
 
 xs :: [Int]
-xs = [0, 1, 7, 9]
+xs = [0,4,6,9]
 
 ys :: [Double]
-ys = [19.0, 16.0, 1.0, 0.0]
+ys = [19.0,19.0,13.0,0.0]
 
 ss :: [Double]
-ss = [-3.0, -2.5, -0.5]
+ss = [0.0,-3.0,-4.333333333333333]
 
 ps2 :: Vector Int
 ps2 = V.fromList [0..23]
@@ -48,25 +50,23 @@ rs2 = V.fromList [2.39604875, 0.59133253, 0.49601200, 0.77828088, 0.36678584,
                   0.95890956, 2.90166793, 0.67492229, 0.21564363]
 
 xs2 :: [Int]
-xs2 = [0, 1, 2, 4, 8, 10, 18, 23]
+xs2 = [0,21,23]
 
 ys2 :: [Double]
-ys2 = [2.39604875, 0.59133253, 0.496012, 0.36678584, 0.13094589,
-       0.1032418, 3.597119e-2, 0.21564363]
+ys2 = [2.39604875,2.90166793,0.21564363]
 
 ss2 :: [Double]
-ss2 = [-1.80471622, -9.532052999999996e-2, -6.461308000000002e-2, -5.895998749999999e-2,
-       -1.3852045000000007e-2, -8.40882625e-3, 3.5934488e-2]
+ss2 = [2.407710380952381e-2,-1.3430121499999998]
 
 spec :: Spec
 spec =
   describe "gcm" $ do
-    it "returns the greatest convex minorant" $ do
-      gcm ps rs `shouldBe` (xs, ys, ss)
-      gcm ps2 rs2 `shouldBe` (xs2, ys2, ss2)
+    it "returns the least concav majorant" $ do
+      lcm ps rs `shouldBe` (xs, ys, ss)
+      lcm ps2 rs2 `shouldBe` (xs2, ys2, ss2)
     it "shouldn't fail on a singleton vector" $
-      gcm (V.singleton 0 :: Vector Int) (V.singleton 1.0 :: Vector Double)
+      lcm (V.singleton 0 :: Vector Int) (V.singleton 1.0 :: Vector Double)
       `shouldBe` ([0], [1.0], [])
     it "shouldn't fail on an empty vector" $
-      gcm (V.empty :: Vector Int) (V.empty :: Vector Double)
+      lcm (V.empty :: Vector Int) (V.empty :: Vector Double)
       `shouldBe` ([], [], [])

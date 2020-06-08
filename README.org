@@ -20,7 +20,7 @@ may be in future releases.
 - [[https://en.wikipedia.org/wiki/Isotonic_regression][Wikipedia article on isotonic regression]].
 
 ** Run times
-Run times with random exponential vectors of different length:
+Run times with random exponential vectors of different lengths:
 #+name: Benchmark
 #+begin_src sh :exports both :results output verbatim
 stack bench 2>&1

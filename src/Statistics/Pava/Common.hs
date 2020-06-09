@@ -20,11 +20,12 @@ module Statistics.Pava.Common
   , smooth
   , unsafeSmooth
   , reverse3
-  ) where
+  )
+where
 
-import qualified Data.Vector.Generic as V
-import qualified Data.Vector.Generic.Mutable as M
-import Data.Vector.Generic (Vector)
+import qualified Data.Vector.Generic           as V
+import qualified Data.Vector.Generic.Mutable   as M
+import           Data.Vector.Generic            ( Vector )
 
 -- | Calculate the slope between to points.
 slope :: (Real a, Real b) => a -> a -> b -> b -> Double
@@ -48,40 +49,56 @@ strictlyOrdered xs | V.length xs <= 1 = True
 -- @
 --  smooth [-2, 2, 4, 5] [0.0, 4.0, 10.0, 88.0] = [0.0, 1.0, 2.0, 3.0, 4.0, 7.0, 10.0, 88.0]
 -- @
-smooth :: (Vector v Bool, Vector v Double, Vector v Int) => v Int -> v Double -> v Double
-smooth xs ys | V.length xs /= V.length ys =
-                 error "smooth: Index and value vector have different length."
-             | not (strictlyOrdered xs) =
-                 error "smooth: Index vector is not strictly ordered."
-             | otherwise = unsafeSmooth xs ys
+smooth
+  :: (Vector v Bool, Vector v Double, Vector v Int)
+  => v Int
+  -> v Double
+  -> v Double
+smooth xs ys
+  | V.length xs /= V.length ys = error
+    "smooth: Index and value vector have different length."
+  | not (strictlyOrdered xs) = error
+    "smooth: Index vector is not strictly ordered."
+  | otherwise = unsafeSmooth xs ys
 
 -- | See 'smooth'.
 --
 -- Assume that:
 -- - the lengths of the provided vectors are equal;
 -- - the predictors are ordered.
-unsafeSmooth :: (Vector v Bool, Vector v Double, Vector v Int) => v Int -> v Double -> v Double
-unsafeSmooth xs ys | l == 0    = V.empty
-                   | l == 1    = V.take 1 ys
-                   | otherwise = V.create (do zs <- M.new m
-                                              go zs 0 1 (bounds 1)
-                                              return zs)
-  where
-    l = V.length xs
-    a = V.head xs
-    b = V.last xs
-    m = b - a + 1
-    -- 0 <= i < m; index traversing resulting vector
-    -- 0 <= j < l; index traversing given vectors
-    bounds i = (xs V.! (i-1), xs V.! i, ys V.! (i-1), ys V.! i)
-    go zs i j (il, ir, yl, yr)
-      | i   >= m  = return ()
-      | a+i >= ir = do M.write zs i yr
-                       go zs (i+1) (j+1) (bounds $ j+1)
-      | otherwise = do M.write zs i (yl + dy)
-                       go zs (i+1) j (il, ir, yl, yr)
-          where dx = a + i - il
-                dy = fromIntegral dx * slope il ir yl yr
+unsafeSmooth
+  :: (Vector v Bool, Vector v Double, Vector v Int)
+  => v Int
+  -> v Double
+  -> v Double
+unsafeSmooth xs ys
+  | l == 0 = V.empty
+  | l == 1 = V.take 1 ys
+  | otherwise = V.create
+    (do
+      zs <- M.new m
+      go zs 0 1 (bounds 1)
+      return zs
+    )
+ where
+  l = V.length xs
+  a = V.head xs
+  b = V.last xs
+  m = b - a + 1
+  -- 0 <= i < m; index traversing resulting vector
+  -- 0 <= j < l; index traversing given vectors
+  bounds i = (xs V.! (i - 1), xs V.! i, ys V.! (i - 1), ys V.! i)
+  go zs i j (il, ir, yl, yr)
+    | i >= m = return ()
+    | a + i >= ir = do
+      M.write zs i yr
+      go zs (i + 1) (j + 1) (bounds $ j + 1)
+    | otherwise = do
+      M.write zs i (yl + dy)
+      go zs (i + 1) j (il, ir, yl, yr)
+   where
+    dx = a + i - il
+    dy = fromIntegral dx * slope il ir yl yr
 
 -- | Reverse lists in a three-tuple.
 reverse3 :: ([a], [b], [c]) -> ([a], [b], [c])

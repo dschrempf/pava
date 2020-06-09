@@ -13,16 +13,17 @@ Creation date: Sun Jun  7 10:49:26 2020.
 
 module Main
   ( main
-  ) where
+  )
+where
 
-import Control.Monad
-import Criterion.Main
-import qualified Data.Vector.Unboxed as V
-import Data.Vector.Unboxed (Vector)
-import System.Random.MWC
-import System.Random.MWC.Distributions
+import           Control.Monad
+import           Criterion.Main
+import qualified Data.Vector.Unboxed           as V
+import           Data.Vector.Unboxed            ( Vector )
+import           System.Random.MWC
+import           System.Random.MWC.Distributions
 
-import Statistics.Gcm
+import           Statistics.Gcm
 
 genPredictors :: Int -> Vector Int
 genPredictors n = V.iterateN n succ 0
@@ -40,8 +41,10 @@ main = do
   d1e4 <- genResponses 10000 g
   d1e5 <- genResponses 100000 g
   defaultMain
-    [ bgroup "Greatest convex minorant"
-      [ bench "Vector of length 1e3" $ nf (gcm p1e3) d1e3
-      , bench "Vector of length 1e4" $ nf (gcm p1e4) d1e4
-      , bench "Vector of length 1e5" $ nf (gcm p1e5) d1e5 ]
+    [ bgroup
+        "Greatest convex minorant"
+        [ bench "Vector of length 1e3" $ nf (gcm p1e3) d1e3
+        , bench "Vector of length 1e4" $ nf (gcm p1e4) d1e4
+        , bench "Vector of length 1e5" $ nf (gcm p1e5) d1e5
+        ]
     ]

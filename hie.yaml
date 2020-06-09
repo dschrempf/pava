@@ -1,0 +1,10 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "pava:lib"
+
+    - path: "./test"
+      component: "pava:test:pava-test"
+
+    - path: "./bench"
+      component: "pava:bench:pava-bench"

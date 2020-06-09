@@ -1,5 +1,5 @@
 name:                pava
-version:             0.1.0.0
+version:             0.1.1
 github:              "dschrempf/pava"
 license:             GPL-3.0-or-later
 author:              "Dominik Schrempf"
@@ -17,9 +17,8 @@ description:         Please see the README on GitHub at <https://github.com/dsch
 library:
   source-dirs: src
   dependencies:
-    - base >= 4.7 && < 5
+    - base
     - vector
-  generated-exposed-modules: Paths_pava
 
 tests:
   pava-test:
@@ -31,7 +30,7 @@ tests:
       - -rtsopts
       - -with-rtsopts=-N
     dependencies:
-      - base >=4.7 && <5
+      - base
       - hspec
       - hspec-discover
       - pava
@@ -47,7 +46,7 @@ benchmarks:
       - -rtsopts
       - -with-rtsopts=-N
     dependencies:
-      - base >=4.7 && <5
+      - base
       - criterion
       - mwc-random
       - pava

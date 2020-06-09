@@ -46,7 +46,7 @@ strictlyOrdered xs | V.length xs <= 1 = True
 -- | Fill in missing values of an indexed vector.
 --
 -- @
---  smooth [-2, 2, 4, 5] [0, 4, 10, 88] = [0, 1, 2, 3, 4, 7, 10, 88]
+--  smooth [-2, 2, 4, 5] [0.0, 4.0, 10.0, 88.0] = [0.0, 1.0, 2.0, 3.0, 4.0, 7.0, 10.0, 88.0]
 -- @
 smooth :: (Vector v Bool, Vector v Double, Vector v Int) => v Int -> v Double -> v Double
 smooth xs ys | V.length xs /= V.length ys =

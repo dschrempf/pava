@@ -26,7 +26,3 @@ cabal.project.local~
 .ghc.environment.*
 
 # End of https://www.toptal.com/developers/gitignore/api/haskell
-
-pava.cabal
-stack.yaml.lock
-*.dump-hi

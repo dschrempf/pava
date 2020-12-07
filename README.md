@@ -1,7 +1,7 @@
 
 # Pool adjacent violators algorithm
 
-<p align="center"><img src="https://travis-ci.org/dschrempf/pava.svg?branch=master" /></p>
+<p align="center"><img src="https://travis-ci.org/dschrempf/pava.svg?branch=master"/></p>
 
 Compute **greatest convex majorants** and **least concave minorants** using the pool
 adjacent violators algorithm.

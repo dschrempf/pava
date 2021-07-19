@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+SERVER="meganeura"
+PATH_SERVER="/scratch/dominik/projects/pava"
+# Include patterns.
+INCLUDE=$(cat <<EOF
+- '**'
+EOF
+)
+# Exclude patterns (take precedence).
+EXCLUDE=$(cat <<EOF
+- dist-newstyle/
+- .stack-work*/
+- .git/
+EOF
+)
+# Honor git ignore patterns (TRUE/FALSE; also takes precedence)?
+GITIGNORE=TRUE

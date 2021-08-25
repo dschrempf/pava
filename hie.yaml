@@ -1,10 +1,10 @@
 cradle:
-  stack:
-    - path: "./src"
-      component: "pava:lib"
+  cabal:
+    - path: "src"
+      component: "lib:pava"
 
-    - path: "./test"
+    - path: "test"
       component: "pava:test:pava-test"
 
-    - path: "./bench"
+    - path: "bench/Bench.hs"
       component: "pava:bench:pava-bench"

@@ -4,4 +4,5 @@ packages:
 - .
 
 nix:
-  path: [nixpkgs=/home/dominik/Nix/Nixpkgs]
+  add-gc-roots: true
+

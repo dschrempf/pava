@@ -11,16 +11,22 @@
         let
           pkgs = nixpkgs.legacyPackages.${system};
           haskellPackages = pkgs.haskellPackages;
-          packageName = "pava";
-          pkg = self.packages.${system}.${packageName};
+          pava = haskellPackages.callCabal2nix "pava" self rec {};
+          pava-dev = pkgs.haskell.lib.doBenchmark pava;
         in
           {
-            packages.${packageName} = haskellPackages.callCabal2nix
-              packageName self rec {};
+            packages.pava = pava;
 
-            defaultPackage = pkg;
+            defaultPackage = pava;
 
-            devShell = (pkgs.haskell.lib.doBenchmark pkg).env;
+            devShell = pkgs.haskellPackages.shellFor {
+              packages = _: [ pava-dev ];
+              buildInputs = with pkgs; [
+                haskellPackages.cabal-install
+                haskellPackages.haskell-language-server
+              ];
+              doBenchmark = true;
+            };
           }
     );
 }

@@ -24,6 +24,7 @@
               buildInputs = with pkgs; [
                 haskellPackages.cabal-install
                 haskellPackages.haskell-language-server
+                haskellPackages.stack
               ];
               doBenchmark = true;
             };

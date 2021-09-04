@@ -25,7 +25,7 @@ may be in future releases.
 Run times with random exponential vectors of different lengths:
 #+name: Benchmark
 #+begin_src sh :exports both :results output verbatim
-stack bench 2>&1
+cabal bench 2>&1
 #+end_src
 
 #+RESULTS: Benchmark

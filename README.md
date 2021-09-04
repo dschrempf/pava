@@ -29,7 +29,7 @@ may be in future releases.
 
 Run times with random exponential vectors of different lengths:
 
-    stack bench 2>&1
+    cabal bench 2>&1
 
     pava> benchmarks
     Running 1 benchmarks...

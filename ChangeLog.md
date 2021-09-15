@@ -5,6 +5,11 @@
 ## Unreleased changes
 
 
+## 0.1.1.2
+
+-   Minor cabal file changes; tooling; Nix support.
+
+
 ## 0.1.1.1
 
 -   Test with new stackage resolver, update version bounds.

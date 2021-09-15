@@ -1,7 +1,7 @@
 cabal-version: 2.2
 
 name:           pava
-version:        0.1.1.1
+version:        0.1.1.2
 synopsis:       Greatest convex majorants and least concave minorants
 description:    Please see the README on GitHub at <https://github.com/dschrempf/pava#readme>
 category:       Math, Statistics

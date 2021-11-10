@@ -14,8 +14,8 @@
         system:
           let
             pkgs = nixpkgs.legacyPackages.${system};
-            haskellPackages = pkgs.haskellPackages;
-            pava = haskellPackages.callCabal2nix "pava" self rec {};
+            hpkgs = pkgs.haskellPackages;
+            pava = hpkgs.callCabal2nix "pava" self rec {};
             pava-dev = pkgs.haskell.lib.doBenchmark pava;
           in
             {
@@ -23,13 +23,13 @@
 
               defaultPackage = pava;
 
-              devShell = pkgs.haskellPackages.shellFor {
+              devShell = hpkgs.shellFor {
                 packages = _: [ pava-dev ];
                 buildInputs = with pkgs; [
                   bashInteractive
-                  haskellPackages.cabal-install
-                  haskellPackages.haskell-language-server
-                  haskellPackages.stack
+                  hpkgs.cabal-install
+                  hpkgs.haskell-language-server
+                  hpkgs.stack
                 ];
                 doBenchmark = true;
                 withHoogle = true;

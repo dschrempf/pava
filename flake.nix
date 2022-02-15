@@ -10,30 +10,29 @@
     , flake-utils
     , nixpkgs
     }:
-      flake-utils.lib.eachDefaultSystem (
-        system:
-          let
-            pkgs = nixpkgs.legacyPackages.${system};
-            hpkgs = pkgs.haskellPackages;
-            pava = hpkgs.callCabal2nix "pava" self rec {};
-            pava-dev = pkgs.haskell.lib.doBenchmark pava;
-          in
-            {
-              packages.pava = pava;
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+        hpkgs = pkgs.haskellPackages;
+        pava = hpkgs.callCabal2nix "pava" self rec { };
+        pava-dev = pkgs.haskell.lib.doBenchmark pava;
+      in
+      {
+        packages.pava = pava;
 
-              defaultPackage = pava;
+        defaultPackage = pava;
 
-              devShell = hpkgs.shellFor {
-                packages = _: [ pava-dev ];
-                buildInputs = with pkgs; [
-                  bashInteractive
-                  hpkgs.cabal-install
-                  hpkgs.haskell-language-server
-                  hpkgs.stack
-                ];
-                doBenchmark = true;
-                withHoogle = true;
-              };
-            }
-      );
+        devShell = hpkgs.shellFor {
+          packages = _: [ pava-dev ];
+          buildInputs = with pkgs; [
+            bashInteractive
+            hpkgs.cabal-install
+            hpkgs.haskell-language-server
+          ];
+          doBenchmark = true;
+          withHoogle = true;
+        };
+      }
+    );
 }

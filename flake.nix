@@ -14,7 +14,7 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        hpkgs = pkgs.haskellPackages;
+        hpkgs = pkgs.haskell.packages.ghc921;
         pava = hpkgs.callCabal2nix "pava" self rec { };
         pava-dev = pkgs.haskell.lib.doBenchmark pava;
       in

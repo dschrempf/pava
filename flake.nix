@@ -3,7 +3,7 @@
 
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/haskell-updates";
 
   outputs =
     { self
@@ -31,7 +31,7 @@
             hpkgs.haskell-language-server
           ];
           doBenchmark = true;
-          withHoogle = true;
+          # withHoogle = true;
         };
       }
     );

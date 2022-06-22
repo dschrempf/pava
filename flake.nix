@@ -19,11 +19,9 @@
         pava-dev = pkgs.haskell.lib.doBenchmark pava;
       in
       {
-        packages.pava = pava;
+        packages.default = pava;
 
-        defaultPackage = pava;
-
-        devShell = hpkgs.shellFor {
+        devShells.default = hpkgs.shellFor {
           packages = _: [ pava-dev ];
           buildInputs = with pkgs; [
             bashInteractive

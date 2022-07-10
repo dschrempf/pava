@@ -5,6 +5,12 @@
 ## Unreleased changes
 
 
+## 0.1.1.4
+
+-   Random 1.2 (bench).
+-   Ghc 923.
+
+
 ## 0.1.1.3
 
 -   Tooling.

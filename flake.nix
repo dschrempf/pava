@@ -15,8 +15,6 @@
         "pava"
       ];
       thisGhcVersion = "ghc943";
-      # # Only required for projects with multiple packages.
-      # hMkPackage = h: n: h.callCabal2nix n (./. + "/${n}") { };
       hOverlay = selfn: supern: {
         haskell = supern.haskell // {
           packageOverrides = selfh: superh:
@@ -41,13 +39,6 @@
           packages = theseHpkgs // { default = theseHpkgs.pava; };
 
           devShells.default = hpkgs.shellFor {
-            # shellHook =
-            #   let
-            #     scripts = ./scripts;
-            #   in
-            #   ''
-            #     export PATH="${scripts}:$PATH"
-            #   '';
             packages = _: (builtins.attrValues theseHpkgsDev);
             nativeBuildInputs = with pkgs; [
               # See https://github.com/NixOS/nixpkgs/issues/59209.

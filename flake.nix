@@ -10,29 +10,60 @@
     , flake-utils
     , nixpkgs
     }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-        hpkgs = pkgs.haskell.packages.ghc924;
-        pava = hpkgs.callCabal2nix "pava" self rec { };
-        pava-dev = pkgs.haskell.lib.doBenchmark pava;
-      in
-      {
-        packages.default = pava;
-
-        devShells.default = hpkgs.shellFor {
-          packages = _: [ pava-dev ];
-          buildInputs = with pkgs; [
-            bashInteractive
-
-            hpkgs.cabal-fmt
-            hpkgs.cabal-install
-            hpkgs.haskell-language-server
-          ];
-          doBenchmark = true;
-          # withHoogle = true;
+    let
+      theseHpkgNames = [
+        "pava"
+      ];
+      thisGhcVersion = "ghc943";
+      # # Only required for projects with multiple packages.
+      # hMkPackage = h: n: h.callCabal2nix n (./. + "/${n}") { };
+      hOverlay = selfn: supern: {
+        haskell = supern.haskell // {
+          packageOverrides = selfh: superh:
+            supern.haskell.packageOverrides selfh superh //
+              {
+                pava = selfh.callCabal2nix "pava" ./. { };
+              };
         };
-      }
-    );
+      };
+      perSystem = system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ hOverlay ];
+          };
+          hpkgs = pkgs.haskell.packages.${thisGhcVersion};
+          hlib = pkgs.haskell.lib;
+          theseHpkgs = nixpkgs.lib.genAttrs theseHpkgNames (n: hpkgs.${n});
+          theseHpkgsDev = builtins.mapAttrs (_: x: hlib.doBenchmark x) theseHpkgs;
+        in
+        {
+          packages = theseHpkgs // { default = theseHpkgs.pava; };
+
+          devShells.default = hpkgs.shellFor {
+            # shellHook =
+            #   let
+            #     scripts = ./scripts;
+            #   in
+            #   ''
+            #     export PATH="${scripts}:$PATH"
+            #   '';
+            packages = _: (builtins.attrValues theseHpkgsDev);
+            nativeBuildInputs = with pkgs; [
+              # See https://github.com/NixOS/nixpkgs/issues/59209.
+              bashInteractive
+
+              # Haskell toolchain.
+              hpkgs.cabal-fmt
+              hpkgs.cabal-install
+              hpkgs.haskell-language-server
+            ];
+            buildInputs = with pkgs; [
+            ];
+            doBenchmark = true;
+            # withHoogle = true;
+          };
+        };
+    in
+    { overlays.default = hOverlay; } // flake-utils.lib.eachDefaultSystem perSystem;
 }

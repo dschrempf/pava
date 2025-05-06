@@ -13,7 +13,7 @@
     }:
     let
       theseHpkgNames = [ "pava" ];
-      thisGhcVersion = "ghc96";
+      thisGhcVersion = "ghc98";
       hOverlay = selfn: supern: {
         haskell = supern.haskell // {
           packageOverrides =

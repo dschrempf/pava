@@ -1,5 +1,6 @@
 * Revision history of pava
 ** Unreleased changes
+- GHC 9.8
 
 ** 0.1.1.4
 - Random 1.2 (bench).
